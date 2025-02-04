@@ -23,7 +23,6 @@ body {
 }
 
 .display {
-  /* display: inline; */
   text-align: end;
 }
 
@@ -33,7 +32,6 @@ body {
 
 .row {
   display: flex;
-  /* justify-content: space-evenly; */
   justify-content: space-between;
 }
 

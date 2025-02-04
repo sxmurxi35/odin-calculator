@@ -39,8 +39,6 @@ function getNumber() {
     btn.addEventListener("click", () => {
       calc.rightNumber += btn.textContent;
       updateDisplay(calc.rightNumber);
-      console.log(calc.rightNumber);
-      console.log(calc.leftNumber);
     });
   });
 }
@@ -63,8 +61,6 @@ function getOperator() {
       } else if (calc.result !== "") {
         calc.operator = "";
         calc.operator += btn.textContent;
-        // calc.leftNumber = calc.result;
-
         calc.operatorCalled = true;
         equal();
       } else {
@@ -80,11 +76,9 @@ getOperator();
 function equal() {
   if (calc.rightNumber == "") calc.rightNumber = calc.leftNumber;
   calculate(calc.operator, calc.leftNumber, calc.rightNumber);
-  console.table(calc);
   updateDisplay(calc.result);
   calc.rightNumber = "";
   calc.leftNumber = "";
-  console.log("equal called");
   calc.operatorCalled = false;
   calc.leftNumber = calc.result;
 }
@@ -97,27 +91,26 @@ function calculate(operator, x, y) {
   const a = Number(x);
   const b = Number(y);
 
-  if (typeof a == "number") console.log("a changed type");
-  if (typeof b == "number") console.log("b changed type");
-
-  if (operator === "+") {
-    calc.result = add(a, b);
-    return calc.result;
-  } else if (operator === "-") {
-    calc.result = subtract(a, b);
-    return calc.result;
-  } else if (operator === "x") {
-    calc.result = multiply(a, b);
-    return calc.result;
-  } else if (operator === "/") {
-    if (a == 0 || b == 0) {
-      calc.result = "stoopid";
-      return calc.result;
-    } else {
-      calc.result = divide(a, b);
-      return calc.result;
-    }
-  }
+  if (typeof a == "number")
+    if (typeof b == "number")
+      if (operator === "+") {
+        calc.result = add(a, b);
+        return calc.result;
+      } else if (operator === "-") {
+        calc.result = subtract(a, b);
+        return calc.result;
+      } else if (operator === "x") {
+        calc.result = multiply(a, b);
+        return calc.result;
+      } else if (operator === "/") {
+        if (a == 0 || b == 0) {
+          calc.result = "stoopid";
+          return calc.result;
+        } else {
+          calc.result = divide(a, b);
+          return calc.result;
+        }
+      }
 }
 
 function add(a, b) {
