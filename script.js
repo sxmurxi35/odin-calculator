@@ -2,15 +2,13 @@ const display = document.querySelector(".display");
 const numBtns = document.querySelectorAll(".numBtn");
 const operBtns = document.querySelectorAll(".operBtn");
 const equalBtn = document.querySelector(".equal");
-const clearBtn = document.querySelector(".clear");
 
-let calc = {
-  leftNum: "",
-  rightNum: "",
+const calc = {
+  leftNumber: "",
+  rightNumber: "",
   operator: "",
-  result: null,
-  hasOperator: false,
-  donePrevious: true,
+  result: "",
+  operatorCalled: false,
 };
 
 function updateDisplay(content) {
@@ -20,8 +18,10 @@ function updateDisplay(content) {
 function getNumber() {
   numBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
-      calc.leftNum += btn.textContent;
-      updateDisplay(calc.leftNum);
+      calc.rightNumber += btn.textContent;
+      updateDisplay(calc.rightNumber);
+      console.log(calc.rightNumber);
+      console.log(calc.leftNumber);
     });
   });
 }
@@ -30,51 +30,49 @@ getNumber();
 function getOperator() {
   operBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
-      calc.operator = btn.textContent;
-      calc.hasOperator = true;
-      updateNumber();
+      if (calc.leftNumber == "" || calc.rightNumber == "") {
+        calc.operator += btn.textContent;
+        if (calc.leftNumber === "") {
+          calc.leftNumber = calc.rightNumber;
+          calc.rightNumber = "";
+        }
+        calc.operatorCalled = true;
+      } else equal();
     });
   });
 }
 getOperator();
 
-function updateNumber() {
-  if (calc.leftNum !== "") {
-    if (calc.hasOperator) {
-      calc.rightNum = calc.leftNum;
-      calc.leftNum = "";
-      updateDisplay("0");
-      console.log(calc.rightNum);
-    }
-  }
+function equal() {
+  calculate(calc.operator, calc.leftNumber, calc.rightNumber);
+  console.table(calc);
+  updateDisplay(calc.result);
+  calc.rightNumber = "";
+  calc.leftNumber = "";
+  console.log("equal called");
+  calc.operatorCalled = false;
 }
 
-function clear() {
-  clearBtn.addEventListener("click", () => {
-    calc = {
-      leftNum: "",
-      rightNum: "",
-      operator: "",
-      result: null,
-      hasOperator: false,
-      donePrevious: true,
-    };
-    updateDisplay("0");
-  });
-}
-clear();
+equalBtn.addEventListener("click", () => {
+    if(calc.leftNumber !== '' && calc.rightNumber !== '') equal()
+});
 
 function calculate(operator, x, y) {
   const a = Number(x);
   const b = Number(y);
+
   if (operator === "+") {
-    return (calc.result = add(a, b));
+    calc.result = add(a, b);
+    return calc.result;
   } else if (operator === "-") {
-    return (calc.result = subtract(b, a));
+    calc.result = subtract(a, b);
+    return calc.result;
   } else if (operator === "x") {
-    return (calc.result = multiply(a, b));
+    calc.result = subtract(a, b);
+    return calc.result;
   } else if (operator === "/") {
-    return (calc.result = divide(b, a));
+    calc.result = subtract(a, b);
+    return calc.result;
   }
 }
 
