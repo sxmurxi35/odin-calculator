@@ -1,0 +1,108 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Roboto, sans-serif;
+  font-size: 24px;
+  background-color: rgb(17, 17, 17);
+  color: rgb(219, 219, 219);
+}
+
+.calc-body {
+  margin-top: 200px;
+  display: flex;
+  flex-direction: column;
+  width: 360px;
+  height: 640px;
+}
+
+.display {
+  /* display: inline; */
+  text-align: end;
+}
+
+.display-body {
+  margin-bottom: 64px;
+}
+
+.row {
+  display: flex;
+  /* justify-content: space-evenly; */
+  justify-content: space-between;
+}
+
+.btn {
+  padding: 30px;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  background-color: transparent;
+  color: rgb(219, 219, 219);
+}
+
+.numBtn:hover {
+  transition: all 0.5s;
+  border: 1px solid rebeccapurple;
+}
+
+.numBtn:active {
+  transition: all 0.1s;
+  border: 1px solid rebeccapurple;
+  background-color: rebeccapurple;
+}
+
+.operBtn:hover {
+  transition: all 0.5s;
+  border: 1px solid rgb(153, 105, 51);
+}
+
+.operBtn:active {
+  transition: all 0.1s;
+  border: 1px solid rgb(153, 105, 51);
+  background-color: rgb(153, 105, 51);
+}
+
+.equal:hover {
+  transition: all 0.5s;
+  border: 1px solid rgb(51, 95, 153);
+}
+
+.equal:active {
+  transition: all 0.1s;
+  border: 1px solid rgb(51, 95, 153);
+  background-color: rgb(51, 95, 153);
+}
+
+.clear:hover {
+  transition: all 0.5s;
+  border: 1px solid rgb(153, 0, 0);
+}
+
+.clear:active {
+  transition: all 0.1s;
+  border: 1px solid rgb(153, 0, 0);
+  background-color: rgb(153, 0, 0);
+}
+
+.credit {
+  margin-top: 20px;
+  font-size: 10px;
+  align-self: center;
+}
+
+a:link,
+a:visited {
+  text-decoration: none;
+  color: rgb(219, 219, 219);
+  cursor:default;
+}
+
+a:hover,
+a:active {
+  color: rgb(170, 48, 48);
+}
