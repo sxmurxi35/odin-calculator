@@ -1,12 +1,16 @@
 const display = document.querySelector(".display");
 const numBtns = document.querySelectorAll(".numBtn");
 const operBtns = document.querySelectorAll(".operBtn");
+const equalBtn = document.querySelector(".equal");
+const clearBtn = document.querySelector(".clear");
 
 let calc = {
   leftNum: "",
   rightNum: "",
   operator: "",
+  result: null,
   hasOperator: false,
+  donePrevious: true,
 };
 
 function updateDisplay(content) {
@@ -45,17 +49,32 @@ function updateNumber() {
   }
 }
 
+function clear() {
+  clearBtn.addEventListener("click", () => {
+    calc = {
+      leftNum: "",
+      rightNum: "",
+      operator: "",
+      result: null,
+      hasOperator: false,
+      donePrevious: true,
+    };
+    updateDisplay("0");
+  });
+}
+clear();
 
-
-function calculate(operator, a, b) {
+function calculate(operator, x, y) {
+  const a = Number(x);
+  const b = Number(y);
   if (operator === "+") {
-    add(a, b);
+    return (calc.result = add(a, b));
   } else if (operator === "-") {
-    subtract(a, b);
-  } else if (operator === "*") {
-    multiply(a, b);
+    return (calc.result = subtract(b, a));
+  } else if (operator === "x") {
+    return (calc.result = multiply(a, b));
   } else if (operator === "/") {
-    divide(a, b);
+    return (calc.result = divide(b, a));
   }
 }
 
