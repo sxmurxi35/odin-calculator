@@ -23,6 +23,28 @@ function getNumber() {
 }
 getNumber();
 
+function getOperator() {
+  operBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      calc.operator = btn.textContent;
+      calc.hasOperator = true;
+      updateNumber();
+    });
+  });
+}
+getOperator();
+
+function updateNumber() {
+  if (calc.leftNum !== "") {
+    if (calc.hasOperator) {
+      calc.rightNum = calc.leftNum;
+      calc.leftNum = "";
+      updateDisplay("0");
+      console.log(calc.rightNum);
+    }
+  }
+}
+
 
 
 function calculate(operator, a, b) {
